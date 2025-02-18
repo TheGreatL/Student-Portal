@@ -1,14 +1,14 @@
 'use client';
 import {Sidebar, SidebarContent, SidebarFooter, SidebarHeader} from '@/components/ui/sidebar';
 
-import SidebarMenuNavigationGroupButton from './sidebar-menu-navigation-buttons';
 import {Home, Notebook, User} from 'lucide-react';
+import SidebarMenuNavigationGroupButton from '../sidebar-menu-navigation-buttons';
 
-export function AppSidebar() {
+export function EmployeeSidebar() {
   const array = [
-    {name: 'Home', href: '/', icon: Home},
-    {name: 'Courses', href: '/courses', icon: Notebook},
-    {name: 'Users', href: '/users', icon: User}
+    {name: 'Home', href: '/employee', icon: Home},
+    {name: 'Courses', href: '/employee/courses', icon: Notebook},
+    {name: 'Users', href: '/employee/users', icon: User}
   ];
   return (
     <Sidebar
@@ -17,7 +17,7 @@ export function AppSidebar() {
       <SidebarHeader></SidebarHeader>
       <SidebarContent>
         <SidebarMenuNavigationGroupButton
-          label='Student Link Navigation'
+          label='Employee Link Navigation'
           navigationData={array}
         />
       </SidebarContent>

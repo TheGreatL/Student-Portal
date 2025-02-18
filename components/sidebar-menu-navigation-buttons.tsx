@@ -21,13 +21,18 @@ export default function SidebarMenuNavigationGroupButton({
 }: SidebarMenuNavigationGroupButtonProps) {
   const pathName = usePathname();
 
+  // console.log(pathName.slice(1));
   return (
     <SidebarGroup>
       <SidebarGroupLabel>{label}</SidebarGroupLabel>
       {navigationData.map((navigation) => (
         <SidebarMenuButton
           key={navigation.name}
-          isActive={pathName.includes(navigation.href)}
+          isActive={
+            navigationData[0].href.slice(1) === '' ?
+              pathName === navigation.href
+            : pathName.slice(1).includes(navigation.href.slice(1))
+          }
           className='my-0.5 p-5 data-[active=true]:bg-blue-400 data-[active=true]:text-white'
           tooltip={navigation.name}
           asChild>

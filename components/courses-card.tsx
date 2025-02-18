@@ -1,3 +1,4 @@
+'use client';
 import {Card, CardContent, CardDescription, CardHeader} from '@/components/ui/card';
 import {CourseType} from '@/types/types';
 import Image from 'next/image';
@@ -11,7 +12,7 @@ export default function CoursesCard({course}: CoursesCard) {
   const {courseId, image, name, progress, teacher, description} = course;
   return (
     <Link
-      href={`courses/${name}`}
+      href={`courses/${courseId}`}
       className='flex w-[20rem]'>
       <Card>
         <CardHeader className='p-3'>
@@ -23,7 +24,7 @@ export default function CoursesCard({course}: CoursesCard) {
           <CardContent className='p-1'>
             <h1 className='text-lg font-semibold'>{name}</h1>
             <CardDescription>{description}</CardDescription>
-            <h1>{courseId}</h1>
+            <h1>CourseId: {courseId}</h1>
             <Progress value={progress} />
             <h1>{teacher}</h1>
           </CardContent>

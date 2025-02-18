@@ -1,57 +1,70 @@
 'use client';
 import {Button} from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog';
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from '@/components/ui/dialog';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
+import {DateClickArg} from '@fullcalendar/interaction/index.js';
 
 type TestModalType = {
-  isOpen: boolean;
-  onOpenChange: () => void;
+  dateClicked: null | DateClickArg;
+  handleOnDialogClose: () => void;
+  handleAddEvent: (date: Date, title: string) => void;
 };
-export default function TestModal({isOpen, onOpenChange}: TestModalType) {
+export default function TestModal({dateClicked, handleOnDialogClose, handleAddEvent}: TestModalType) {
+  const isOpen = dateClicked !== null;
+
+  const {date} = dateClicked || {date: new Date()};
+
+  const dateString = date.toISOString().slice(0, 16);
+
+  console.log(dateString);
+
+  const handleFormAction = (formData: FormData) => {
+    const title = formData.get('title') as string;
+    const date = formData.get('date') as string;
+    handleAddEvent(new Date(date), title);
+    handleOnDialogClose();
+  };
   return (
     <Dialog
       open={isOpen}
-      onOpenChange={onOpenChange}>
+      onOpenChange={handleOnDialogClose}>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Save activity</DialogTitle>
           <DialogDescription>Make changes to your profile here. Click save when done.</DialogDescription>
         </DialogHeader>
-        <div className='grid gap-4 py-4'>
-          <div className='grid grid-cols-4 items-center gap-4'>
+        <form
+          className='flex flex-col gap-5 px-5'
+          action={handleFormAction}>
+          <div className='flex items-center gap-4'>
             <Label
-              htmlFor='name'
+              htmlFor='title'
               className='text-right'>
-              Name
+              Title
             </Label>
             <Input
-              id='name'
+              id='title'
+              name='title'
               className='col-span-3'
             />
           </div>
-          <div className='grid grid-cols-4 items-center gap-4'>
+          <div className='flex items-center gap-4'>
             <Label
-              htmlFor='username'
+              htmlFor='date'
               className='text-right'>
-              Username
+              Date
             </Label>
             <Input
-              id='username'
+              id='date'
+              name='date'
+              type='datetime-local'
               className='col-span-3'
+              defaultValue={dateString}
             />
           </div>
-        </div>
-        <DialogFooter>
-          <Button type='submit'>Save changes</Button>
-        </DialogFooter>
+          <Button type='submit'>Save activity</Button>
+        </form>
       </DialogContent>
     </Dialog>
   );

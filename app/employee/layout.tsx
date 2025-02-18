@@ -1,16 +1,17 @@
 import DisplayPathName from '@/components/display-pathname';
 import Header from '@/components/header';
-import SidebarTrigger from '@/components/sidebar-trigger';
-import {Button} from '@/components/ui/button';
-import {SidebarProvider} from '@/components/ui/sidebar';
-import {CalendarDays, User} from 'lucide-react';
 import HeaderScroll from '@/components/header-scroll';
+import SidebarTrigger from '@/components/sidebar-trigger';
+import {SidebarProvider} from '@/components/ui/sidebar';
+import {Button} from '@/components/ui/button';
 import Link from 'next/link';
-import {AdminSidebar} from '@/components/sidebars/admin-sidebar';
-type AdminLayoutProps = Readonly<{
+import {CalendarDays, User} from 'lucide-react';
+import {EmployeeSidebar} from '@/components/sidebars/employee-sidebar';
+
+type EmployeeLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;
-export default function AdminLayout({children}: AdminLayoutProps) {
+export default function EmployeeLayout({children}: EmployeeLayoutProps) {
   return (
     <SidebarProvider
       style={
@@ -19,7 +20,7 @@ export default function AdminLayout({children}: AdminLayoutProps) {
           '--sidebar-width-mobile': '15rem'
         } as React.CSSProperties
       }>
-      <AdminSidebar />
+      <EmployeeSidebar />
       <main className='flex grow flex-col bg-gray-200'>
         <Header className='gap-2 p-2 text-white'>
           <div className='flex max-w-[25rem] grow items-center gap-5'>
@@ -33,17 +34,17 @@ export default function AdminLayout({children}: AdminLayoutProps) {
                 <CalendarDays />
               </Button>
             </Link>
-            <Link href={'/employee'}>
+            <Link href={'/'}>
               <Button>
-                To Employee
+                To Student
                 <User />
               </Button>
             </Link>
             <Link
-              href={'/'}
+              href={'/admin'}
               className='flex items-center justify-center gap-5'>
               <Button>
-                To Student
+                To admin
                 <User />
               </Button>
             </Link>

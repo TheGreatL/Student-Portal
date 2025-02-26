@@ -1,13 +1,25 @@
 import {Sequelize} from 'sequelize';
+import pg from 'pg';
+// Extract the environment variables and assign them to the variables
+const {NODE_ENV, DATABASE_URL, DEV_DATABASE_URL, TEST_DATABASE_URL} = process.env;
 
-const {NODE_ENV, DATABASE_URL} = process.env;
+let url;
 
-const url = DATABASE_URL;
-
-
+switch (NODE_ENV) {
+  case 'development':
+    url = DEV_DATABASE_URL;
+    break;
+  case 'test':
+    url = TEST_DATABASE_URL;
+    break;
+  default:
+    url = DATABASE_URL;
+}
 
 // Create a new instance of Sequelize and pass the database URL
 const sequelize = new Sequelize(String(url), {
+  dialect: 'postgres',
+  dialectModule: pg,
   timezone: '+09:00',
   define: {
     charset: 'utf8mb4',

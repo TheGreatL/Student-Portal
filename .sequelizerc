@@ -1,9 +1,9 @@
-import {resolve} from 'path';
+require('ts-node/register');
+const path = require('path');
 
-export default {
-  config: resolve('database', 'config/config.js'),
-  'models-path': resolve('database', 'models'),
-  'seeders-path': resolve('database', 'seeders'),
-  'migrations-path': resolve('database', 'migrations'),
-  require: 'ts-node/register' // This ensures that `ts-node` is used to load TypeScript files
+module.exports = {
+  config: path.resolve('./database/config', 'config.js'),
+  'models-path': path.resolve('./database/models'),
+  'seeders-path': path.resolve('./database/seeders'),
+  'migrations-path': path.resolve('./database/migrations')
 };

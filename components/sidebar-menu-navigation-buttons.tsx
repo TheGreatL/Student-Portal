@@ -28,11 +28,7 @@ export default function SidebarMenuNavigationGroupButton({
       {navigationData.map((navigation) => (
         <SidebarMenuButton
           key={navigation.name}
-          isActive={
-            navigationData[0].href.slice(1) === '' ?
-              pathName === navigation.href
-            : pathName.slice(1).includes(navigation.href.slice(1))
-          }
+          isActive={pathName === navigation.href || (navigation.href !== '/' && pathName.includes(navigation.href))}
           className='my-0.5 p-5 data-[active=true]:bg-blue-400 data-[active=true]:text-white'
           tooltip={navigation.name}
           asChild>

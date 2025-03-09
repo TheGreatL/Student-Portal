@@ -4,7 +4,7 @@ type CourseViewProps = {
 export default async function CourseView({params}: CourseViewProps) {
   // await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const {'course-slug': slug} = await params;
+  const {'course-slug': slug} = params;
   return (
     <div>
       <h1>CourseView</h1>

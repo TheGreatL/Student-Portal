@@ -8,7 +8,7 @@ export function EmployeeSidebar() {
   const array = [
     {name: 'Home', href: '/employee', icon: Home},
     {name: 'Courses', href: '/employee/courses', icon: Notebook},
-    {name: 'Users', href: '/employee/users', icon: User}
+    {name: 'Students', href: '/employee/students', icon: User}
   ];
   return (
     <Sidebar

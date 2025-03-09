@@ -8,7 +8,7 @@ export function StudentSidebar() {
   const array = [
     {name: 'Home', href: '/', icon: Home},
     {name: 'Courses', href: '/courses', icon: Notebook},
-    {name: 'Users', href: '/users', icon: User}
+    {name: 'Students', href: '/students', icon: User}
   ];
   return (
     <Sidebar

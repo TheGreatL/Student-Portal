@@ -1,6 +1,8 @@
 import {Carousel, CarouselContent, CarouselItem} from '@/components/ui/carousel';
 import Image from 'next/image';
-import cat from '../public/cat.jpg';
+import cat from '@/assets/cat.jpg';
+import n from '@/assets/n.jpg';
+import nayeon from '@/assets/nayeon.jpg';
 
 export default function HomeCarousel() {
   return (
@@ -12,17 +14,22 @@ export default function HomeCarousel() {
           loop: true
         }}>
         <CarouselContent>
-          {Array.from({length: 5}).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className=''>
-              <Image
-                src={cat}
-                alt='Picture of Cat'
-                className='h-[25rem] w-full cursor-pointer rounded-sm'
-              />
-            </CarouselItem>
-          ))}
+          {Array.from({length: 5}).map((_, index) => {
+            let image = n;
+            if (index % 2 === 0) image = cat;
+            else if (index % 3 === 0) image = nayeon;
+            return (
+              <CarouselItem
+                key={index}
+                className=''>
+                <Image
+                  src={image}
+                  alt='Picture of Cat'
+                  className='h-[25rem] w-full cursor-pointer rounded-sm'
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
     </div>

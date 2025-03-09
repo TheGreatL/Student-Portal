@@ -1,7 +1,7 @@
 import {StaticImageData} from 'next/image';
 
 type Status = 'on going' | 'completed';
-export type CourseType = {
+export type TCourse = {
   name: string;
   description: string;
   courseId: number;
@@ -9,4 +9,5 @@ export type CourseType = {
   image: StaticImageData;
   teacher: string;
   status: Status;
+  slug: string;
 };

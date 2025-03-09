@@ -1,9 +1,10 @@
+import {GetServerSideProps} from 'next';
+
 type CourseViewProps = {
   params: {'course-slug': string};
 };
-export default async function CourseView({params}: CourseViewProps) {
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
+export default function CourseView({params}: CourseViewProps) {
   const {'course-slug': slug} = params;
   return (
     <div>
@@ -12,3 +13,12 @@ export default async function CourseView({params}: CourseViewProps) {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const {params} = context;
+  return {
+    props: {
+      params
+    }
+  };
+};

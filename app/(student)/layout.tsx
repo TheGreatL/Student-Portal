@@ -1,4 +1,3 @@
-
 import DisplayPathName from '@/components/display-pathname';
 import Header from '@/components/header';
 import SidebarTrigger from '@/components/sidebar-trigger';
@@ -39,14 +38,16 @@ export default function StudentLayout({children}: StudentLayoutProps) {
             </form> 
             </div> */}
           <div className='flex grow justify-end gap-5'>
-            <Link href={'/calendar'}>
+            <Link
+              href={'/calendar'}
+              className='hidden lg:block'>
               <Button>
                 <CalendarDays />
               </Button>
             </Link>
             <Link href={'/employee'}>
               <Button>
-                To Employee
+                <span className='hidden lg:inline-block'> To Employee</span>
                 <User />
               </Button>
             </Link>
@@ -54,7 +55,7 @@ export default function StudentLayout({children}: StudentLayoutProps) {
               href={'/admin'}
               className='flex items-center justify-center gap-5'>
               <Button>
-                To admin
+                <span className='hidden lg:inline-block'> To Admin</span>
                 <User />
               </Button>
             </Link>

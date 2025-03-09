@@ -13,17 +13,18 @@ export default function CoursesCard({course}: CoursesCard) {
   return (
     <Link
       href={`courses/${slug}`}
-      className='flex w-[20rem]'>
+      className='flex h-auto w-[9rem] lg:w-[20rem]'>
       <Card>
-        <CardHeader className='p-3'>
+        <CardHeader className='p-2 lg:p-3'>
           <Image
             src={image}
             alt='Picture of Cat'
-            className='h-[15rem] rounded-sm'
+            className='h-[9rem] rounded-sm lg:h-[15rem]'
+            priority
           />
           <CardContent className='p-1'>
-            <h1 className='text-lg font-semibold'>{name}</h1>
-            <CardDescription>{description}</CardDescription>
+            <h1 className='text-sm/tight font-semibold lg:text-lg'>{name}</h1>
+            <CardDescription className='text-xs/tight lg:text-sm'>{description}</CardDescription>
             <h1>CourseId: {courseId}</h1>
             <Progress value={progress} />
             <h1>{teacher}</h1>

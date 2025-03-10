@@ -3,10 +3,19 @@ import {courses} from '@/utils/data';
 
 import * as motion from 'motion/react-client';
 
-export default function CoursesPage() {
+type CoursesPageProps = {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+};
+export default async function CoursesPage({searchParams}: CoursesPageProps) {
+  const searchParamsV = await searchParams;
+
+  console.log(searchParamsV?.query);
   return (
     <div className='flex gap-5 p-5'>
-      <motion.div className='flex flex-wrap justify-center gap-2 bg-red-500 py-2'>
+      <motion.div className='flex flex-wrap justify-center gap-2 py-2'>
         {courses.map((course) => (
           <CoursesCard
             course={course}

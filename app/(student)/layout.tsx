@@ -7,6 +7,7 @@ import {CalendarDays, User} from 'lucide-react';
 import Link from 'next/link';
 import HeaderScroll from '@/components/header-scroll';
 import {StudentSidebar} from '@/components/sidebars/student-sidebar';
+import Search from '@/components/search';
 type StudentLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;
@@ -27,16 +28,7 @@ export default function StudentLayout({children}: StudentLayoutProps) {
             <DisplayPathName />
           </div>
           <HeaderScroll />
-          {/* <div className='flex grow items-center justify-center'> 
-          <form className='flex grow overflow-hidden rounded-2xl bg-white text-black focus-within:ring-2'>
-              <Input className='border-0 ring-0 focus-visible:ring-0 focus-visible:outline-0' />
-              <Button
-                type='button'
-                variant={'ghost'}>
-                <SearchIcon />
-              </Button>
-            </form> 
-            </div> */}
+          <Search />
           <div className='flex grow justify-end gap-5'>
             <Link
               href={'/calendar'}

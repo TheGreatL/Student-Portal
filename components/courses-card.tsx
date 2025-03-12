@@ -13,7 +13,7 @@ export default function CoursesCard({course}: CoursesCard) {
   return (
     <Link
       href={`courses/${slug}`}
-      className='flex h-auto w-[9rem] lg:w-[20rem]'>
+      className='flex h-auto w-[9rem] md:w-[15rem] lg:w-[20rem]'>
       <Card>
         <CardHeader className='p-2 lg:p-3'>
           <Image

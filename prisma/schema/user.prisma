@@ -1,0 +1,40 @@
+enum Role {
+  student
+  teacher
+  admin
+}
+model User {
+  id String @id @default(cuid())
+  firstName String 
+  lastName String
+  email String
+  password String
+  avatar String
+  role Role
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime? 
+  student Student? 
+  teacher Teacher? 
+}
+
+model Student{
+  id String @id @default(cuid())
+  userId String @unique
+  user User  @relation(fields: [userId],references: [id]) 
+  course String
+}
+
+enum Department {
+  ict
+  sh
+  bm
+  tm
+  hm
+}
+model Teacher{
+  id String @id @default(cuid())
+ userId String @unique
+  user User  @relation(fields: [userId],references: [id]) 
+  department Department
+}

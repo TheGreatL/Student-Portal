@@ -8,12 +8,12 @@ import Autoplay from 'embla-carousel-autoplay';
 
 export default function HomeCarousel() {
   return (
-    <div className='flex items-center justify-center'>
+    <article className='flex items-center justify-center'>
       <Carousel
         className='grow'
         plugins={[
           Autoplay({
-            delay: 1000,
+            delay: 5000,
             stopOnFocusIn: false,
             stopOnInteraction: false
           })
@@ -42,6 +42,6 @@ export default function HomeCarousel() {
           })}
         </CarouselContent>
       </Carousel>
-    </div>
+    </article>
   );
 }

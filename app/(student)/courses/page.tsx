@@ -14,7 +14,7 @@ export default async function CoursesPage({searchParams}: CoursesPageProps) {
 
   console.log(searchParamsV?.query);
   return (
-    <div className='flex gap-5 p-5'>
+    <section className='flex gap-5 p-5'>
       <motion.div className='flex flex-wrap justify-center gap-2 py-2'>
         {courses.map((course) => (
           <CoursesCard
@@ -23,6 +23,6 @@ export default async function CoursesPage({searchParams}: CoursesPageProps) {
           />
         ))}
       </motion.div>
-    </div>
+    </section>
   );
 }

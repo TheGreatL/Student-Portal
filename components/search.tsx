@@ -11,12 +11,13 @@ export default function Search() {
   const {replace} = useRouter();
   const searchAction = (formData: FormData) => {
     const search = formData.get('search') as string;
+    console.log('searching');
 
     if (search.trim() == '' || search.trim() === ' ') return;
 
     const params = new URLSearchParams(searchParams);
 
-    params.set('query', search);
+    params.set('query', search.toLowerCase());
 
     if (pathname !== '/courses') {
       replace(`/courses?${params.toString()}`);
@@ -30,6 +31,7 @@ export default function Search() {
         action={searchAction}
         className='flex grow overflow-hidden rounded-2xl bg-white text-black focus-within:ring-2'>
         <Input
+          placeholder='Search Course'
           name='search'
           className='border-0 ring-0 focus-visible:ring-0 focus-visible:outline-0'
         />

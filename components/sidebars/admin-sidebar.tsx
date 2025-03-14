@@ -1,5 +1,5 @@
 'use client';
-import {Sidebar, SidebarContent, SidebarFooter, SidebarHeader} from '@/components/ui/sidebar';
+import {Sidebar, SidebarContent} from '@/components/ui/sidebar';
 
 import {Home, Notebook, User} from 'lucide-react';
 import SidebarMenuNavigationGroupButton from '../sidebar-menu-navigation-buttons';
@@ -14,14 +14,13 @@ export function AdminSidebar() {
     <Sidebar
       collapsible='icon'
       className=''>
-      <SidebarHeader></SidebarHeader>
       <SidebarContent>
         <SidebarMenuNavigationGroupButton
+          role='admin'
           label='Admin Link Navigation'
           navigationData={array}
         />
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
     </Sidebar>
   );
 }

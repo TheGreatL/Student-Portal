@@ -186,7 +186,7 @@ export default function GradesPage() {
         </Select>
         <p className=''>Tertiary</p>
       </div>
-      <article className='flex grow flex-wrap justify-between gap-3'>
+      <article className='flex grow flex-wrap justify-evenly gap-3'>
         {grades.map((grade) => (
           <TableGrade
             key={grade.course}

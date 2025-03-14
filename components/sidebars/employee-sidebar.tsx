@@ -19,6 +19,7 @@ export function EmployeeSidebar() {
         <SidebarMenuNavigationGroupButton
           label='Employee Link Navigation'
           navigationData={array}
+          role='employee'
         />
       </SidebarContent>
       <SidebarFooter></SidebarFooter>

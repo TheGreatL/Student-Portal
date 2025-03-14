@@ -14,10 +14,12 @@ type NavigationData = {
 type SidebarMenuNavigationGroupButtonProps = {
   label: string;
   navigationData: NavigationData[];
+  role?: string;
 };
 export default function SidebarMenuNavigationGroupButton({
   label,
-  navigationData
+  navigationData,
+  role = ''
 }: SidebarMenuNavigationGroupButtonProps) {
   const pathName = usePathname();
 
@@ -28,7 +30,9 @@ export default function SidebarMenuNavigationGroupButton({
         <SidebarMenuButton
           key={navigation.name}
           // first condition is for route that is not / route
-          isActive={pathName === navigation.href || (navigation.href !== '/' && pathName.startsWith(navigation.href))}
+          isActive={
+            pathName === navigation.href || (navigation.href !== `/${role}` && pathName.startsWith(navigation.href))
+          }
           className='my-0.5 p-5 data-[active=true]:bg-blue-400 data-[active=true]:text-white'
           tooltip={navigation.name}
           asChild>

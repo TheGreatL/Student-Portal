@@ -16,7 +16,7 @@ export type TGradeCourse = {
 export default function TableGrade({grade}: {grade: TGradeCourse}) {
   const {course, instructor, terms, dateEnrolled} = grade;
   return (
-    <section className='flex h-[13rem] w-[32rem] flex-col overflow-hidden rounded-lg bg-white'>
+    <section className='flex h-[13rem] w-[20rem] flex-col overflow-hidden rounded-lg bg-white lg:w-[32rem]'>
       <div className='bg-gray-300 p-2'>
         <strong>{course}</strong>
         <p className='uppercase'>

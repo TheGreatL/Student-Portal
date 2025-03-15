@@ -19,14 +19,14 @@ export default function SchedulePage() {
       day: 'F',
       time: '2:00PM-4:00PM',
       room: 'A402',
-      instructor: 'CHRISTIAN JOSHUA EBALIN'
+      instructor: 'Teacher'
     },
     {
       subject: 'Web Systems and Technologies',
       day: 'F',
       time: '4:00PM-6:00PM',
       room: 'D403',
-      instructor: 'JENER GALANG'
+      instructor: 'Teacher'
     }
   ];
 

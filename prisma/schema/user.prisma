@@ -1,8 +1,9 @@
 
 model Program{
-  id String @id @default(cuid())
+  id String @id  @default(uuid()) @db.Uuid
   acronym String 
   name String
+  department Department
   student Student[]
   @@index([acronym,name])
 
@@ -14,7 +15,7 @@ enum Role {
   admin
 }
 model User {
-  id String @id @default(cuid())
+   id String @id @db.Uuid @default(uuid())
   firstName String 
   lastName String
   email String @unique
@@ -33,9 +34,9 @@ model User {
 
 model Student{
   id String @id 
-  userId String @unique
+  userId String  @unique @db.Uuid
   user User  @relation(fields: [userId],references: [id]) 
-  programId String 
+  programId String  @db.Uuid 
   program Program @relation(fields: [programId],references: [id])
 }
 
@@ -47,8 +48,8 @@ enum Department {
   hm
 }
 model Teacher{
-  id String @id @default(cuid())
- userId String @unique
+  id String @id @db.Uuid @default(uuid())
+  userId String  @unique @db.Uuid
   user User  @relation(fields: [userId],references: [id]) 
   department Department
 }

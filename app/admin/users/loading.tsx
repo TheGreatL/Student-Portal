@@ -1,6 +1,6 @@
 import {Skeleton} from '@/components/ui/skeleton';
 
-export default function RootLoading() {
+export default function AdminUsersLoading() {
   return (
     <section className='flex flex-wrap items-center justify-center space-x-[3rem]'>
       <div className='space-y-2 p-5'>

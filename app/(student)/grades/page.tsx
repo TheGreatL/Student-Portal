@@ -15,7 +15,7 @@ export default function GradesPage() {
     {
       course: 'Great Books',
       dateEnrolled: '26 FEB, 2025',
-      instructor: 'ANNIE LAZARO ',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',
@@ -37,8 +37,8 @@ export default function GradesPage() {
     },
     {
       course: 'Information Assurance & Security (Cybersecurity Fundamentals)',
-      dateEnrolled: 'TBA',
-      instructor: 'annie',
+      dateEnrolled: '26 FEB, 2025',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',
@@ -60,8 +60,8 @@ export default function GradesPage() {
     },
     {
       course: 'Management Information Systems',
-      dateEnrolled: 'Christian Joshua Ebalin',
-      instructor: 'annie',
+      dateEnrolled: '26 FEB, 2025',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',
@@ -83,8 +83,8 @@ export default function GradesPage() {
     },
     {
       course: 'IT Capstone Project 1',
-      dateEnrolled: 'Rubinato Lubian III',
-      instructor: 'annie',
+      dateEnrolled: '26 FEB, 2025',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Finals',
@@ -95,7 +95,7 @@ export default function GradesPage() {
     {
       course: 'Web Systems and Technologies',
       dateEnrolled: '26 FEB, 2025',
-      instructor: 'Jener Galang',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',
@@ -118,7 +118,7 @@ export default function GradesPage() {
     {
       course: 'Programming Languages',
       dateEnrolled: '26 FEB, 2025',
-      instructor: 'christian joshua ebalin',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',
@@ -141,7 +141,7 @@ export default function GradesPage() {
     {
       course: 'Mobile Systems and Technologies',
       dateEnrolled: '26 FEB, 2025',
-      instructor: 'Jasper Elen',
+      instructor: 'Teacher',
       terms: [
         {
           term: 'Prelim',

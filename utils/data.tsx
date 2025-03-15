@@ -15,7 +15,7 @@ export const courses: TCourse[] = [
     image: generateImage(1),
     name: 'Great Books',
     slug: 'great-books',
-    progress: 100,
+    progress: 80,
     teacher: 'daddy bong',
     description: 'Great Books',
     status: 'on going'
@@ -25,7 +25,7 @@ export const courses: TCourse[] = [
     image: generateImage(2),
     name: 'Application Development',
     slug: 'application-development',
-    progress: 100,
+    progress: 6,
     teacher: 'daddy bong',
     description: 'Application Development',
     status: 'completed'
@@ -35,7 +35,7 @@ export const courses: TCourse[] = [
     image: generateImage(3),
     name: 'Management Information System',
     slug: 'management-information-system',
-    progress: 100,
+    progress: 19,
     teacher: 'daddy bong',
     description: 'Management Information System',
     status: 'on going'
@@ -45,7 +45,7 @@ export const courses: TCourse[] = [
     image: generateImage(4),
     name: 'System Management',
     slug: 'system-management',
-    progress: 100,
+    progress: 50,
     teacher: 'daddy bong',
     description: 'System Management',
     status: 'completed'

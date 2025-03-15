@@ -50,16 +50,15 @@ export const userSchema = z.object({
       required_error: 'First name is required',
       invalid_type_error: 'First name must be a string'
     })
-    .trim()
-    .min(1, 'First name cannot be empty'),
-
+    .nonempty('First name cannot be empty')
+    .trim(),
   lastName: z
     .string({
       required_error: 'Last name is required',
       invalid_type_error: 'Last name must be a string'
     })
     .trim()
-    .min(1, 'Last name cannot be empty'),
+    .nonempty('Last name cannot be empty'),
 
   email: z
     .string({

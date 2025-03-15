@@ -12,17 +12,31 @@ import {Label} from '../ui/label';
 import {Input} from '../ui/input';
 import {ScrollArea} from '../ui/scroll-area';
 
-import {SubmitHandler, useForm} from 'react-hook-form';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {TUser, userSchema} from '@/lib/schema/user-schema';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {addStudentAction} from '@/features/actions/actions';
 import {Loader} from 'lucide-react';
-export default function AddStudentModal() {
+import {redirect} from 'next/navigation';
+import {useState} from 'react';
+import {Program} from '@prisma/client';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
+export default function AddStudentModal({programs}: {programs: Program[]}) {
+  const [isShowing, setIsShowing] = useState(false);
   const {
     register,
     handleSubmit,
-
     reset,
+
+    control,
     formState: {errors, isSubmitting}
   } = useForm<TUser>({
     resolver: zodResolver(userSchema),
@@ -59,13 +73,21 @@ export default function AddStudentModal() {
     if (errors) {
       console.log(errors);
     }
+    if (data) {
+      setIsShowing(false);
+      redirect('/admin/users');
+    }
   };
 
   return (
     <Dialog
-      onOpenChange={(open) => {
-        if (!open) reset();
-      }}>
+      onOpenChange={(isShowing) => {
+        if (isShowing) {
+          reset();
+        }
+        setIsShowing(isShowing);
+      }}
+      open={isShowing}>
       <DialogTrigger asChild>
         <Button variant='outline'>Add Student</Button>
       </DialogTrigger>
@@ -102,12 +124,35 @@ export default function AddStudentModal() {
                 className={`${errors.program && 'text-red-500'}`}>
                 Program
               </Label>
-              <Input
-                id='program'
-                {...register('program')}
-                placeholder='Program'
-                className={`${errors.program && 'border-red-500'}`}
+              <Controller
+                name='program'
+                control={control}
+                render={({field}) => (
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}>
+                    <SelectTrigger
+                      id='program'
+                      className='bg-white'>
+                      <SelectValue placeholder='Programs' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Programs Available</SelectLabel>
+
+                        {programs.map((program) => (
+                          <SelectItem
+                            value={program.id}
+                            key={program.acronym}>
+                            {program.acronym} - {program.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
               />
+
               <p className='text-xs text-red-500'>{errors.program && errors.program.message}</p>
             </div>
           </ScrollArea>

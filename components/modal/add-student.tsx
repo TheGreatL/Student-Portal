@@ -21,6 +21,8 @@ export default function AddStudentModal() {
   const {
     register,
     handleSubmit,
+
+    reset,
     formState: {errors, isSubmitting}
   } = useForm<TUser>({
     resolver: zodResolver(userSchema),
@@ -48,12 +50,22 @@ export default function AddStudentModal() {
     formData.append('firstName', submitData.firstName);
     formData.append('lastName', submitData.lastName);
     formData.append('program', submitData.program);
+    formData.append('password', 'mypassword');
+    formData.append('avatar', 'asda');
 
-    const {data, error} = await addStudentAction(formData);
+    const {data, errors} = await addStudentAction(formData);
+
+    console.log(data);
+    if (errors) {
+      console.log(errors);
+    }
   };
-  console.log(errors);
+
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) reset();
+      }}>
       <DialogTrigger asChild>
         <Button variant='outline'>Add Student</Button>
       </DialogTrigger>
@@ -65,7 +77,7 @@ export default function AddStudentModal() {
         <form
           className='flex flex-col gap-3'
           onSubmit={handleSubmit(onSubmitForm)}>
-          <ScrollArea className='max-h-[15rem]'>
+          <ScrollArea className='mb-5 max-h-[25rem] pr-2'>
             <div className='flex flex-col gap-2 p-2'>
               <Label htmlFor='firstName'>First Name</Label>
               <Input
@@ -85,11 +97,16 @@ export default function AddStudentModal() {
               <p className='text-xs text-red-500'>{errors.lastName && errors.lastName.message}</p>
             </div>
             <div className='flex flex-col gap-2 p-2'>
-              <Label htmlFor='program'>Program</Label>
+              <Label
+                htmlFor='program'
+                className={`${errors.program && 'text-red-500'}`}>
+                Program
+              </Label>
               <Input
                 id='program'
                 {...register('program')}
                 placeholder='Program'
+                className={`${errors.program && 'border-red-500'}`}
               />
               <p className='text-xs text-red-500'>{errors.program && errors.program.message}</p>
             </div>

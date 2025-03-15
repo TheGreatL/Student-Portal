@@ -1,9 +1,12 @@
-import {Client} from 'pg';
+import {PrismaClient} from '@prisma/client';
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL
-});
+type CustomNodeTsGlobal = {
+  prisma: PrismaClient;
+};
+declare const global: CustomNodeTsGlobal;
 
-client.connect();
+const prisma = global.prisma || new PrismaClient();
 
-export default client;
+if (process.env.NODE_ENV === 'development') global.prisma = prisma;
+
+export default prisma;

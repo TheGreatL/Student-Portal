@@ -7,16 +7,16 @@ export default function AdminUsersLoading() {
       <TableHeader>
         <TableRow>
           <TableHead>
-            <Skeleton className='h-[2rem] w-full bg-gray-500' />
+            <Skeleton className='h-[1.5rem] w-full bg-gray-500' />
           </TableHead>
           <TableHead>
-            <Skeleton className='h-[2rem] w-full bg-gray-500' />
+            <Skeleton className='h-[1.5rem] w-full bg-gray-500' />
           </TableHead>
           <TableHead>
-            <Skeleton className='h-[2rem] w-full bg-gray-500' />
+            <Skeleton className='h-[1.5rem] w-full bg-gray-500' />
           </TableHead>
           <TableHead>
-            <Skeleton className='h-[2rem] w-full bg-gray-500' />
+            <Skeleton className='h-[1.5rem] w-full bg-gray-500' />
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -24,16 +24,16 @@ export default function AdminUsersLoading() {
         {Array.from({length: 5}).map((_, len) => (
           <TableRow key={len}>
             <TableCell>
-              <Skeleton className='w- h-[3rem] bg-gray-500' />
+              <Skeleton className='h-[1.5rem] bg-gray-500' />
             </TableCell>
             <TableCell>
-              <Skeleton className='w- h-[3rem] bg-gray-500' />
+              <Skeleton className='h-[1.5rem] bg-gray-500' />
             </TableCell>
             <TableCell>
-              <Skeleton className='w- h-[3rem] bg-gray-500' />
+              <Skeleton className='h-[1.5rem] bg-gray-500' />
             </TableCell>
             <TableCell>
-              <Skeleton className='w- h-[3rem] bg-gray-500' />
+              <Skeleton className='h-[1.5rem] bg-gray-500' />
             </TableCell>
           </TableRow>
         ))}

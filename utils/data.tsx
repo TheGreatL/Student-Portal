@@ -1,7 +1,7 @@
-import {TCourse} from '@/types/types';
 import cat from '@/assets/cat.jpg';
 import nayeon from '@/assets/nayeon.jpg';
 import n from '@/assets/n.jpg';
+import {TCourse} from '@/features/courses/schema/course';
 
 const generateImage = (number: number) => {
   if (number % 2 === 0) return cat;

@@ -34,6 +34,7 @@ export default async function UsersPage({
             <TabsTrigger value='teacher'>Teachers</TabsTrigger>
           </TabsList>
           <TabsContent value='student'>
+            {/* <AdminUsersLoading /> */}
             <Suspense fallback={<AdminUsersLoading />}>
               <StudentTable page={page} />
             </Suspense>

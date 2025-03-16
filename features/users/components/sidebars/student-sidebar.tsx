@@ -1,8 +1,8 @@
 'use client';
+import SidebarMenuNavigationGroupButton from '@/components/sidebar-menu-navigation-buttons';
 import {Sidebar, SidebarContent, SidebarFooter, SidebarHeader} from '@/components/ui/sidebar';
 
 import {ChartNoAxesColumn, Clock3, Highlighter, Home, Notebook, UsersRound} from 'lucide-react';
-import SidebarMenuNavigationGroupButton from '../sidebar-menu-navigation-buttons';
 
 export function StudentSidebar() {
   const array = [

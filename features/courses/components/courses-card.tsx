@@ -1,9 +1,10 @@
 'use client';
 import {Card, CardContent, CardDescription, CardHeader} from '@/components/ui/card';
-import {TCourse} from '@/types/types';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import {Progress} from './ui/progress';
+import {Progress} from '../../../components/ui/progress';
+import {TCourse} from '../schema/course';
 
 type CoursesCard = {
   course: TCourse;

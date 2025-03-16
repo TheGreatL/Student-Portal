@@ -1,4 +1,4 @@
-import CoursesCard from '@/components/courses-card';
+import CoursesCard from '@/features/courses/components/courses-card';
 import {courses} from '@/utils/data';
 
 import * as motion from 'motion/react-client';

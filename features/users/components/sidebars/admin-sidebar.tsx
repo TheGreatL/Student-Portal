@@ -1,8 +1,8 @@
 'use client';
+import SidebarMenuNavigationGroupButton from '@/components/sidebar-menu-navigation-buttons';
 import {Sidebar, SidebarContent} from '@/components/ui/sidebar';
 
 import {Home, Notebook, User} from 'lucide-react';
-import SidebarMenuNavigationGroupButton from '../sidebar-menu-navigation-buttons';
 
 export function AdminSidebar() {
   const array = [

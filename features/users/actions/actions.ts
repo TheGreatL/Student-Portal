@@ -1,6 +1,6 @@
 'use server';
 
-import {userSchema} from '@/lib/schema/user-schema';
+import {userSchema} from '@/features/users/schema/user-schema';
 import {transformZodErrors} from '@/lib/utils';
 import prisma from '@/service/db';
 import {Role, User} from '@prisma/client';

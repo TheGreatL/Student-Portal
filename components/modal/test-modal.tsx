@@ -32,7 +32,7 @@ export default function TestModal({dateClicked, handleOnDialogClose, handleAddEv
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
           <DialogTitle>Save activity</DialogTitle>
-          <DialogDescription>Make changes to your profile here. Click save when done.</DialogDescription>
+          <DialogDescription>Plan this date</DialogDescription>
         </DialogHeader>
         <form
           className='flex flex-col gap-5 px-5'

@@ -1,10 +1,10 @@
-import AddStudentModal from '@/components/modal/add-student';
 import prisma from '@/service/db';
 import React, {Suspense} from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 
-import StudentTable from '@/components/student-table';
+import StudentTable from '@/features/users/components/student-table';
 import AdminUsersLoading from './loading';
+import AddStudentModal from '@/features/users/components/add-student';
 export default async function UsersPage({
   searchParams
 }: {

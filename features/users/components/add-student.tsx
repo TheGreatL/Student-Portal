@@ -7,15 +7,11 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog';
-import {Button} from '../ui/button';
-import {Label} from '../ui/label';
-import {Input} from '../ui/input';
-import {ScrollArea} from '../ui/scroll-area';
 
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
-import {TUser, userSchema} from '@/lib/schema/user-schema';
+import {TUser, userSchema} from '@/features/users/schema/user-schema';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {addStudentAction} from '@/features/actions/actions';
+import {addStudentAction} from '@/features/users/actions/actions';
 import {Loader} from 'lucide-react';
 import {redirect} from 'next/navigation';
 import {useState} from 'react';
@@ -29,6 +25,10 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import {Button} from '@/components/ui/button';
+import {ScrollArea} from '@/components/ui/scroll-area';
+import {Label} from '@/components/ui/label';
+import {Input} from '@/components/ui/input';
 export default function AddStudentModal({programs}: {programs: Program[]}) {
   const [isShowing, setIsShowing] = useState(false);
   const {

@@ -1,7 +1,6 @@
 import Header from '@/components/header';
 import {SidebarProvider} from '@/components/ui/sidebar';
-
-import {AdminSidebar} from '@/components/sidebars/admin-sidebar';
+import {AdminSidebar} from '@/features/users/components/sidebars/admin-sidebar';
 type AdminLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;

@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import TableGrade, {TGradeCourse} from '@/components/table-grade';
+import TableGrade, {TGradeCourse} from '@/features/users/components/table-grade';
 
 export default function GradesPage() {
   const grades: TGradeCourse[] = [

@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 import {SidebarProvider} from '@/components/ui/sidebar';
-import {StudentSidebar} from '@/components/sidebars/student-sidebar';
+import {StudentSidebar} from '@/features/users/components/sidebars/student-sidebar';
 type StudentLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;

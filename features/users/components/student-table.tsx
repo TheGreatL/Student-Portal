@@ -1,6 +1,6 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 
-import UsersStudentTablePagination from '@/components/users-student-table-pagination';
+import UsersStudentTablePagination from '@/features/users/components/users-student-table-pagination';
 import prisma from '@/service/db';
 export default async function StudentTable({page}: {page: number}) {
   const limit = 5;
@@ -20,7 +20,13 @@ export default async function StudentTable({page}: {page: number}) {
     }
   });
 
-  const isMax = students.length < 5;
+  const allStudents = await prisma.user.findMany({
+    where: {
+      role: 'student'
+    }
+  });
+
+  const numberOfPage = Math.ceil(allStudents.length / limit);
   return (
     <div className='h-full'>
       <h1>Students</h1>
@@ -49,7 +55,7 @@ export default async function StudentTable({page}: {page: number}) {
       </Table>
       <UsersStudentTablePagination
         page={page}
-        isMax={isMax}
+        numberOfPage={numberOfPage}
       />
     </div>
   );

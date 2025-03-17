@@ -1,35 +1,34 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
 
-import UsersStudentTablePagination from '@/features/users/components/users-student-table-pagination';
+import UsersStudentTablePagination from '@/features/user/components/users-student-table-pagination';
 import prisma from '@/service/db';
-export default async function StudentTable({page}: {page: number}) {
+export default async function TeachersTable({page}: {page: number}) {
   const limit = 5;
   const skip = (page - 1) * limit;
-  const students = await prisma.user.findMany({
+  const teachers = await prisma.user.findMany({
     where: {
-      role: 'student'
+      role: 'teacher'
     },
     take: limit,
     skip,
     include: {
-      student: {
-        include: {
-          program: true
-        }
-      }
+      teacher: true
+    },
+    orderBy: {
+      createdAt: 'desc'
     }
   });
 
-  const allStudents = await prisma.user.findMany({
+  const allTeacher = await prisma.user.findMany({
     where: {
-      role: 'student'
+      role: 'teacher'
     }
   });
 
-  const numberOfPage = Math.ceil(allStudents.length / limit);
+  const numberOfPage = Math.ceil(allTeacher.length / limit);
   return (
     <div className='h-full'>
-      <h1>Students</h1>
+      <h1>Teachers</h1>
       <Table className='bg-white'>
         <TableCaption>Registered Student</TableCaption>
         <TableHeader>
@@ -37,18 +36,18 @@ export default async function StudentTable({page}: {page: number}) {
             <TableHead>ID</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Program</TableHead>
+            <TableHead>Department</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {students.map((student) => (
-            <TableRow key={student.id}>
-              <TableCell>{student.student?.id}</TableCell>
+          {teachers.map((teacher) => (
+            <TableRow key={teacher.id}>
+              <TableCell>{teacher.teacher?.id}</TableCell>
               <TableCell>
-                {student.firstName} {student.lastName}
+                {teacher.firstName} {teacher.lastName}
               </TableCell>
-              <TableCell>{student.email}</TableCell>
-              <TableCell>{student.student?.program.acronym}</TableCell>
+              <TableCell>{teacher.email}</TableCell>
+              <TableCell>{teacher.teacher?.department}</TableCell>
             </TableRow>
           ))}
         </TableBody>

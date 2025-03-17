@@ -1,11 +1,74 @@
 model Course{
-    id String @id @default(cuid())
-    name String
+    id String @id @db.Uuid @default(uuid()) 
+    name String @unique
     department Department 
     description String
+    image String @db.Text
+    class Class[]
+
     createdAt DateTime? @default(now())
     updatedAt DateTime? @updatedAt
-    deletedAt DateTime?  
+    deletedAt DateTime?  @db.Date
+    @@unique([name,department])
 }
+
+model Class{
+    id String @id @default(uuid()) @db.Uuid
+    
+    courseId  String @db.Uuid 
+
+    course Course @relation(fields: [courseId],references: [id])
+    classSchedule ClassSchedule[]
+
+    teacherId String @db.Uuid
+    teacher Teacher @relation(fields: [teacherId], references: [id])
+    
+    classStudent ClassStudent[]
+    section String @db.Text
+
+    isOngoing Boolean @db.Boolean
+
+    academicYear String @db.Text
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+    deletedAt DateTime?  @db.Date
+
+
+    @@unique([academicYear,section])
+}
+model ClassStudent{
+    id String @id @default(uuid()) @db.Uuid
+    classId String @db.Uuid 
+    class Class @relation(fields: [classId], references: [id])
+    
+    studentId BigInt
+    student Student? @relation(fields: [studentId],references: [id])
+    @@unique([classId,studentId])
+
+}
+model ClassSchedule {
+     id String @id @default(uuid()) @db.Uuid
+     roomId String @db.Uuid
+     room Room @relation(fields: [roomId],references: [id])
+     schedule DateTime 
+     classId String @db.Uuid 
+     class Class @relation(fields: [classId], references: [id])
+}
+
+model Room{
+    id String @id @default(uuid()) @db.Uuid
+    building String @db.Text
+    floor String @db.Text
+    name String @db.Text
+    image String @db.Text
+    classSchedule ClassSchedule[]
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+    deletedAt DateTime?  @db.Date
+
+    @@unique([building,name])
+}
+ 
+
 
 

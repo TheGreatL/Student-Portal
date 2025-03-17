@@ -4,10 +4,10 @@ import {Card, CardContent, CardDescription, CardHeader} from '@/components/ui/ca
 import Image from 'next/image';
 import Link from 'next/link';
 import {Progress} from '../../../components/ui/progress';
-import {TCourse} from '../schema/course';
+import {TTestCourseSchema} from '../schema/course';
 
 type CoursesCard = {
-  course: TCourse;
+  course: TTestCourseSchema;
 };
 export default function CoursesCard({course}: CoursesCard) {
   const {courseId, image, name, progress, teacher, description, slug} = course;

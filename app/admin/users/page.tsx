@@ -2,9 +2,10 @@ import prisma from '@/service/db';
 import React, {Suspense} from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 
-import StudentTable from '@/features/users/components/student-table';
+import StudentTable from '@/features/user/components/student-table';
 import AdminUsersLoading from './loading';
-import AddStudentModal from '@/features/users/components/add-student';
+import CreateUserModal from '@/features/user/components/modals/create-user';
+import TeachersTable from '@/features/user/components/teacher-table';
 export default async function UsersPage({
   searchParams
 }: {
@@ -12,7 +13,6 @@ export default async function UsersPage({
     page?: string;
   }>;
 }) {
-  // TODO: ADD USER (EMPLOYEE)
   // TODO: CREATE Table Component
 
   const page = Number((await searchParams)?.page || 1);
@@ -23,7 +23,7 @@ export default async function UsersPage({
     <section className='flex grow flex-col'>
       <section>
         <h1>All of Users</h1>
-        <AddStudentModal programs={programs} />
+        <CreateUserModal programs={programs} />
       </section>
       <article className='my-2 grow p-3'>
         <Tabs
@@ -40,7 +40,9 @@ export default async function UsersPage({
             </Suspense>
           </TabsContent>
           <TabsContent value='teacher'>
-            <h1>Teachers</h1>
+            <Suspense fallback={<AdminUsersLoading />}>
+              <TeachersTable page={page} />
+            </Suspense>
           </TabsContent>
         </Tabs>
       </article>

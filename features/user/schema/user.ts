@@ -1,4 +1,4 @@
-import {Role} from '@prisma/client';
+import {Department, Role} from '@prisma/client';
 import {z} from 'zod';
 
 export const programSchema = z.object({
@@ -8,32 +8,6 @@ export const programSchema = z.object({
 });
 
 export type TProgram = z.infer<typeof programSchema>;
-
-// export const userSchema = z.object({
-//   id: z.string().cuid().trim().optional(),
-//   firstName: z
-//     .string({
-//       required_error: 'First is required',
-//       invalid_type_error: 'First must be a string'
-//     })
-//     .trim(),
-//   lastName: z.string().trim(),
-//   email: z.string().email({message: 'Invalid email address'}).trim().optional(),
-//   password: z.string().trim().optional(),
-//   avatar: z.string().trim().optional(),
-//   role: z.nativeEnum(Role),
-//   student: z.object({}).optional(),
-//   teacher: z.object({}).optional(),
-//   program: z
-//     .string({
-//       required_error: 'Program is required'
-//     })
-//     .trim()
-//     .min(1, 'Program cannot be empty'),
-//   createdAt: z.optional(z.date()),
-//   updatedAt: z.optional(z.date()),
-//   deletedAt: z.optional(z.date())
-// });
 
 export const userSchema = z.object({
   id: z
@@ -86,21 +60,35 @@ export const userSchema = z.object({
     .trim()
     .optional(),
 
-  role: z.nativeEnum(Role, {
-    required_error: 'Role is required',
-    invalid_type_error: 'Invalid role selection'
-  }),
-
-  student: z.object({}).optional(),
-  teacher: z.object({}).optional(),
-
-  program: z
-    .string({
-      required_error: 'Program is required',
-      invalid_type_error: 'Program must be a string'
+  role: z
+    .nativeEnum(Role, {
+      required_error: 'Role is required',
+      invalid_type_error: 'Invalid role selection'
     })
-    .trim()
-    .min(1, 'Program cannot be empty'),
+    .optional(),
+
+  student: z
+    .object({
+      program: z
+        .string({
+          required_error: 'Program is required',
+          invalid_type_error: 'Program must be a string'
+        })
+        .trim()
+        .min(1, 'Program cannot be empty')
+        .optional()
+    })
+    .optional(),
+  teacher: z
+    .object({
+      department: z
+        .nativeEnum(Department, {
+          required_error: 'Department is required',
+          invalid_type_error: 'Invalid department selection'
+        })
+        .optional()
+    })
+    .optional(),
 
   createdAt: z
     .date({

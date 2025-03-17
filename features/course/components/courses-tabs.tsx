@@ -1,7 +1,7 @@
 'use client';
 import React, {useMemo} from 'react';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import CoursesCard from '../../courses/components/courses-card';
+import CoursesCard from './courses-card';
 import {courses} from '@/utils/data';
 
 export default function CoursesTabs() {

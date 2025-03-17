@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 import {SidebarProvider} from '@/components/ui/sidebar';
-import {EmployeeSidebar} from '@/features/users/components/sidebars/employee-sidebar';
+import {EmployeeSidebar} from '@/features/user/components/sidebars/employee-sidebar';
 type EmployeeLayoutProps = Readonly<{
   children: React.ReactNode;
 }>;

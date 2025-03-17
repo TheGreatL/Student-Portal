@@ -1,7 +1,7 @@
 import cat from '@/assets/cat.jpg';
 import nayeon from '@/assets/nayeon.jpg';
 import n from '@/assets/n.jpg';
-import {TCourse} from '@/features/courses/schema/course';
+import {TTestCourseSchema} from '@/features/course/schema/course';
 
 const generateImage = (number: number) => {
   if (number % 2 === 0) return cat;
@@ -9,7 +9,7 @@ const generateImage = (number: number) => {
   else return n;
 };
 
-export const courses: TCourse[] = [
+export const courses: TTestCourseSchema[] = [
   {
     courseId: 1,
     image: generateImage(1),

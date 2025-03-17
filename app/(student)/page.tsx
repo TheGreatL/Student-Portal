@@ -1,5 +1,5 @@
-import HomeCarousel from '@/features/users/components/home-carousel';
-import CoursesTabs from '@/features/users/components/courses-tabs';
+import HomeCarousel from '@/features/user/components/home-carousel';
+import CoursesTabs from '@/features/course/components/courses-tabs';
 
 export default async function HomePage() {
   return (

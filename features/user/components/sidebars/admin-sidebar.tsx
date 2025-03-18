@@ -2,13 +2,14 @@
 import SidebarMenuNavigationGroupButton from '@/components/sidebar-menu-navigation-buttons';
 import {Sidebar, SidebarContent} from '@/components/ui/sidebar';
 
-import {Home, Notebook, User} from 'lucide-react';
+import {Backpack, Home, Notebook, User} from 'lucide-react';
 
 export function AdminSidebar() {
   const array = [
     {name: 'Home', href: '/admin', icon: Home},
     {name: 'Courses', href: '/admin/courses', icon: Notebook},
-    {name: 'Users', href: '/admin/users', icon: User}
+    {name: 'Users', href: '/admin/users', icon: User},
+    {name: 'Rooms', href: '/admin/rooms', icon: Backpack}
   ];
   return (
     <Sidebar

@@ -1,12 +1,11 @@
-
-model Program{
-  id String @id  @default(uuid()) @db.Uuid
-  acronym String 
-  name String
+model Program {
+  id         String     @id @default(uuid()) @db.Uuid
+  acronym    String
+  name       String
   department Department
-  student Student[]
-  @@index([acronym,name])
+  student    Student[]
 
+  @@index([acronym, name])
 }
 
 enum Role {
@@ -14,30 +13,31 @@ enum Role {
   teacher
   admin
 }
+
 model User {
-   id String @id @db.Uuid @default(uuid())
-  firstName String 
-  lastName String
-  email String  @unique
-  password String 
-  avatar String
-  role Role
+  id        String    @id @default(uuid()) @db.Uuid
+  firstName String
+  lastName  String
+  email     String    @unique
+  password  String
+  avatar    String
+  role      Role
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
-  deletedAt DateTime? 
-  student Student? 
-  teacher Teacher? 
+  deletedAt DateTime?
+  student   Student?
+  teacher   Teacher?
 
-  @@unique([lastName,email,firstName])
-  @@index([id,email,role])
+  @@unique([lastName, email, firstName])
+  @@index([id, email, role])
 }
 
-model Student{
-  id BigInt @id @db.BigInt
-  userId String  @unique @db.Uuid
-  user User  @relation(fields: [userId],references: [id]) 
-  programId String  @db.Uuid 
-  program Program @relation(fields: [programId],references: [id])
+model Student {
+  id           BigInt         @id @db.BigInt
+  userId       String         @unique @db.Uuid
+  user         User           @relation(fields: [userId], references: [id])
+  programId    String         @db.Uuid
+  program      Program        @relation(fields: [programId], references: [id])
   classStudent ClassStudent[]
 }
 
@@ -48,10 +48,11 @@ enum Department {
   tm
   hm
 }
-model Teacher{
-  id String @id @db.Uuid @default(uuid())
-  userId String  @unique @db.Uuid
-  user User  @relation(fields: [userId],references: [id]) 
+
+model Teacher {
+  id         String     @id @default(uuid()) @db.Uuid
+  userId     String     @unique @db.Uuid
+  user       User       @relation(fields: [userId], references: [id])
   department Department
-  class Class[]
+  class      Class[]
 }

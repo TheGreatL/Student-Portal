@@ -29,7 +29,7 @@ import {ScrollArea} from '@/components/ui/scroll-area';
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
 import {redirect} from 'next/navigation';
-import {addUserAction} from '../../actions/actions';
+import {createUserAction} from '../../actions/actions';
 import {departments} from '@/utils/utils';
 
 export default function CreateUserModal({programs}: {programs: Program[]}) {
@@ -59,7 +59,7 @@ export default function CreateUserModal({programs}: {programs: Program[]}) {
     if (userType === 'student') formData.append('program', submitData.student?.program as string);
     else if (userType === 'teacher') formData.append('department', submitData.teacher?.department as Department);
 
-    const {errors} = await addUserAction(formData);
+    const {errors} = await createUserAction(formData);
 
     if (errors) {
       console.log(errors);
@@ -174,7 +174,7 @@ export default function CreateUserModal({programs}: {programs: Program[]}) {
                             onValueChange={field.onChange}
                             value={field.value}>
                             <SelectTrigger
-                              className={`${form.formState.errors.student?.program ? 'border-red-500' : ''} }`}>
+                              className={`${form.formState.errors.student?.program ? 'border-red-300' : ''} }`}>
                               <SelectValue placeholder='Program' />
                             </SelectTrigger>
                             <SelectContent>
@@ -206,7 +206,7 @@ export default function CreateUserModal({programs}: {programs: Program[]}) {
                             onValueChange={field.onChange}
                             value={field.value}>
                             <SelectTrigger
-                              className={`${form.formState.errors.teacher?.department ? 'border-red-500' : ''} }`}>
+                              className={`${form.formState.errors.teacher?.department ? 'border-red-300' : ''} }`}>
                               <SelectValue placeholder='Departments' />
                             </SelectTrigger>
                             <SelectContent>

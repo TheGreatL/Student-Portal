@@ -21,8 +21,8 @@ model Class {
     course        Course          @relation(fields: [courseId], references: [id])
     classSchedule ClassSchedule[]
 
-    teacherId String  @db.Uuid
-    teacher   Teacher @relation(fields: [teacherId], references: [id])
+    teacherId String   @db.Uuid
+    teacher   Teacher? @relation(fields: [teacherId], references: [id])
 
     classStudent ClassStudent[]
     section      String         @db.Text

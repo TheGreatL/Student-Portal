@@ -9,56 +9,51 @@ import {
 } from '@/components/ui/dialog';
 
 import {SubmitHandler, useForm} from 'react-hook-form';
+
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Loader} from 'lucide-react';
 import {useState} from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
+
 import {Button} from '@/components/ui/button';
 import {ScrollArea} from '@/components/ui/scroll-area';
 
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
 import {redirect} from 'next/navigation';
-import {courseSchema, TCourse} from '@/features/course/schema/course';
-import {departments} from '@/utils/utils';
-import {createCourse} from '../actions/action';
-export default function CreateCourseModal() {
-  const [isShowing, setIsShowing] = useState<boolean>(false);
 
-  const form = useForm<TCourse>({
-    resolver: zodResolver(courseSchema),
+import {createRoomAction} from '../../action';
+import {roomSchema, TRoom} from '../../schema/room';
+
+export default function CreateRoomModal() {
+  const [isShowing, setIsShowing] = useState<boolean>(false);
+  const form = useForm<TRoom>({
+    resolver: zodResolver(roomSchema),
     defaultValues: {
       name: '',
-      department: undefined,
-      description: '',
+      building: '',
+      floor: '',
       image: ''
     }
   });
 
-  const onSubmitForm: SubmitHandler<TCourse> = async (submitData) => {
+  const onSubmitForm: SubmitHandler<TRoom> = async (submitData) => {
     // call the server action
+
     const formData = new FormData();
     formData.append('name', submitData.name);
-    formData.append('description', submitData.description);
-    formData.append('department', submitData.department as string);
-    formData.append('image', submitData.image);
-    const {errors} = await createCourse(formData);
+    formData.append('building', submitData.building.toUpperCase());
+    formData.append('floor', submitData.floor as string);
+    formData.append('image', submitData.image as string);
+
+    const {errors} = await createRoomAction(formData);
 
     if (errors) {
-      form.setError('name', {
-        message: errors[0].message as string
-      });
+      console.log(errors);
     }
+
     if (!errors) {
-      redirect('/admin/courses');
+      setIsShowing(false);
+      redirect('/admin/rooms');
     }
   };
 
@@ -72,13 +67,14 @@ export default function CreateCourseModal() {
       }}
       open={isShowing}>
       <DialogTrigger asChild>
-        <Button variant='outline'>Create Course</Button>
+        <Button variant='outline'>Create Room</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Create Course</DialogTitle>
-          <DialogDescription>Create Course</DialogDescription>
+          <DialogTitle>Create Room</DialogTitle>
+          <DialogDescription>Create a room</DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
           <form
             className='flex flex-col gap-3'
@@ -94,6 +90,43 @@ export default function CreateCourseModal() {
                       <FormControl>
                         <Input
                           placeholder='Name'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className='flex flex-col gap-2 p-2'>
+                <FormField
+                  control={form.control}
+                  name='building'
+                  render={({field}) => (
+                    <FormItem>
+                      <FormLabel>Building</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='Building'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className='flex flex-col gap-2 p-2'>
+                <FormField
+                  control={form.control}
+                  name='floor'
+                  render={({field}) => (
+                    <FormItem>
+                      <FormLabel>Floor</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder='1st | 2nd | 3rd | 4th'
                           {...field}
                         />
                       </FormControl>
@@ -120,58 +153,6 @@ export default function CreateCourseModal() {
                   )}
                 />
               </div>
-
-              <div className='flex flex-col gap-2 p-2'>
-                <FormField
-                  control={form.control}
-                  name='description'
-                  render={({field}) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder='Description'
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className='flex flex-col gap-2 p-2'>
-                <FormField
-                  control={form.control}
-                  name='department'
-                  render={({field}) => (
-                    <FormItem>
-                      <FormLabel>Department</FormLabel>
-                      <FormControl>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}>
-                          <SelectTrigger className={`${form.formState.errors.department ? 'border-red-300' : ''} }`}>
-                            <SelectValue placeholder='Departments' />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectLabel>Departments Available</SelectLabel>
-                              {departments.map((department) => (
-                                <SelectItem
-                                  value={department.value}
-                                  key={department.value}>
-                                  {department.name}
-                                </SelectItem>
-                              ))}
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
             </ScrollArea>
             <Button
               disabled={form.formState.isSubmitting}
@@ -180,7 +161,7 @@ export default function CreateCourseModal() {
                 <>
                   <span>Submitting...</span> <Loader />
                 </>
-              : 'Create Crouse'}
+              : 'Create Room'}
             </Button>
           </form>
         </Form>

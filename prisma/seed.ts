@@ -24,6 +24,7 @@ async function main() {
       {name: 'D403', building: 'D', floor: '4', image: 'image'}
     ]
   });
+
   console.log({programs, courses, rooms});
 }
 main()

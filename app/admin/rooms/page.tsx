@@ -1,15 +1,19 @@
-import {Button} from '@/components/ui/button';
-import RoomsCard from '@/features/class/component/rooms-card';
+import CreateRoomModal from '@/features/class/components/modals/create-room';
+import RoomsTable from '@/features/class/components/rooms-table';
 import prisma from '@/service/db';
 import React from 'react';
 
 export default async function RoomsPage() {
-  const rooms = await prisma.room.findMany();
+  const rooms = await prisma.room.findMany({
+    orderBy: {
+      name: 'asc'
+    }
+  });
   return (
     <section className='flex grow flex-col'>
       <h1>Rooms Page</h1>
-      <Button>Add Class</Button>
-      <RoomsCard rooms={rooms} />
+      <CreateRoomModal />
+      <RoomsTable rooms={rooms} />
     </section>
   );
 }

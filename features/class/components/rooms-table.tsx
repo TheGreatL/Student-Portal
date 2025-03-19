@@ -15,7 +15,7 @@ import React, {useState} from 'react';
 import {Button} from '@/components/ui/button';
 import {Eye} from 'lucide-react';
 
-export default function RoomsCard({rooms}: {rooms: Room[]}) {
+export default function RoomsTable({rooms}: {rooms: Room[]}) {
   const [building, setBuilding] = useState<string | undefined>(undefined);
 
   const buildings = rooms.reduce<string[]>((accumulator, current) => {

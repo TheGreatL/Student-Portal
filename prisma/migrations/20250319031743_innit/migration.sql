@@ -34,6 +34,18 @@ CREATE TABLE "Class" (
 );
 
 -- CreateTable
+CREATE TABLE "ClassGrade" (
+    "id" UUID NOT NULL,
+    "classId" UUID NOT NULL,
+    "prelim" TEXT NOT NULL,
+    "midterm" TEXT NOT NULL,
+    "preFinals" TEXT NOT NULL,
+    "finals" TEXT NOT NULL,
+
+    CONSTRAINT "ClassGrade_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "ClassStudent" (
     "id" UUID NOT NULL,
     "classId" UUID NOT NULL,
@@ -148,6 +160,9 @@ ALTER TABLE "Class" ADD CONSTRAINT "Class_courseId_fkey" FOREIGN KEY ("courseId"
 
 -- AddForeignKey
 ALTER TABLE "Class" ADD CONSTRAINT "Class_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "Teacher"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ClassGrade" ADD CONSTRAINT "ClassGrade_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ClassStudent" ADD CONSTRAINT "ClassStudent_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -5,7 +5,7 @@ import {transformZodErrors} from '@/lib/utils';
 import prisma from '@/service/db';
 import {Department, Role} from '@prisma/client';
 import {z} from 'zod';
-export async function addUserAction(
+export async function createUserAction(
   formData: FormData
 ): Promise<{errors: {path: string | null; message: string}[] | null}> {
   const role = formData.get('userType') as Role;
@@ -23,10 +23,11 @@ export async function addUserAction(
   const password = formData.get('password') as string;
   const email =
     role === 'student' ?
-      `${lastName.toString().replace(' ', '')}.${id}@student.portal.edu.ph`
-    : (`${lastName.replace(' ', '')}.${firstName.replace(' ', '')}@student.portal.edu.ph` as string);
+      `${lastName.toString().replace(/\s/g, '')}.${id}@student.portal.edu.ph`
+    : (`${lastName.replace(/\s/g, '')}.${firstName.replace(/\s/g, '')}@student.portal.edu.ph` as string);
   // await new Promise((resolve) => setInterval(resolve, 5000));
 
+  console.log('Teacher Email:', email);
   try {
     if (role === 'student') {
       const validatedFields = userSchema.parse({
@@ -60,6 +61,7 @@ export async function addUserAction(
         }
       });
     } else {
+      console.log('Teacher Email:', email);
       const validatedFields = userSchema.parse({
         firstName,
         lastName,
@@ -79,9 +81,9 @@ export async function addUserAction(
         }
       });
       let teacherEmail = email;
-      if (teachersWithSameName.length) {
+      if (teachersWithSameName.length > 1) {
         teacherEmail =
-          `${lastName.replace(' ', '')}.${firstName.replace(' ', '')}${teachersWithSameName.length + 1}@student.portal.edu.ph` as string;
+          `${lastName.replace(/\s/g, '')}.${firstName.replace(/\s/g, '')}${teachersWithSameName.length + 1}@student.portal.edu.ph` as string;
       }
       await prisma.user.create({
         data: {

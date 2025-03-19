@@ -10,10 +10,11 @@ export default async function CoursesPage() {
   // TODO: ADD COURSE: MANAGE COURSE: ASSIGN COURSE(STUDENT AND EMPLOYEE)
 
   const courses = await prisma.course.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
+    // orderBy: {
+    //   createdAt: 'desc'
+    // }
   });
+  console.log('fetched courses:', courses);
   return (
     <section className='flex grow flex-col'>
       <section>

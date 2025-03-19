@@ -14,7 +14,6 @@ export default async function CoursesPage() {
       createdAt: 'desc'
     }
   });
-  // console.log(departments.filter((department) => department.name == 'ict')[0]);
   return (
     <section className='flex grow flex-col'>
       <section>

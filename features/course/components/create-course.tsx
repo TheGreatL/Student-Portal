@@ -58,6 +58,7 @@ export default function CreateCourseModal() {
       });
     }
     if (!errors) {
+      setIsShowing(false);
       redirect('/admin/courses');
     }
   };

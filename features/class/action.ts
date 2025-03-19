@@ -99,6 +99,7 @@ export async function createClassAction(formData: FormData): Promise<{
         errors: transformZodErrors(error)
       };
     }
+
     console.dir(error);
     return {
       errors: [

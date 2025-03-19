@@ -26,12 +26,13 @@ import {ScrollArea} from '@/components/ui/scroll-area';
 
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
-import {redirect} from 'next/navigation';
+import {redirect, useRouter} from 'next/navigation';
 import {courseSchema, TCourse} from '@/features/course/schema/course';
 import {departments} from '@/utils/utils';
 import {createCourse} from '../actions/action';
 export default function CreateCourseModal() {
   const [isShowing, setIsShowing] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<TCourse>({
     resolver: zodResolver(courseSchema),
@@ -59,6 +60,7 @@ export default function CreateCourseModal() {
     }
     if (!errors) {
       setIsShowing(false);
+      router.refresh();
       redirect('/admin/courses');
     }
   };

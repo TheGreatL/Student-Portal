@@ -5,14 +5,14 @@ model Course {
     description String
     image       String     @db.Text
     class       Class[]
-
-    createdAt DateTime? @default(now())
-    updatedAt DateTime? @updatedAt
-    deletedAt DateTime? @db.Date
+    createdAt   DateTime?  @default(now())
+    updatedAt   DateTime?  @updatedAt
+    deletedAt   DateTime?  @db.Date
 
     @@unique([name, department])
 }
 
+// Class have course
 model Class {
     id String @id @default(uuid()) @db.Uuid
 
@@ -27,7 +27,7 @@ model Class {
     classStudent ClassStudent[]
     section      String         @db.Text
 
-    ClassGrade ClassGrade[]
+    classDiscussion ClassDiscussion[]
 
     isOngoing Boolean @db.Boolean
 
@@ -39,36 +39,24 @@ model Class {
     @@unique([academicYear, section])
 }
 
-model ClassGrade {
-    id        String @id @default(uuid()) @db.Uuid
-    classId   String @db.Uuid
-    class     Class  @relation(fields: [classId], references: [id])
-    prelim    String @db.Text
-    midterm   String @db.Text
-    preFinals String @db.Text
-    finals    String @db.Text
-}
+// Class have schedule
+model ClassSchedule {
+    id     String @id @default(uuid()) @db.Uuid
+    roomId String @db.Uuid
+    room   Room   @relation(fields: [roomId], references: [id])
 
-model ClassStudent {
-    id      String @id @default(uuid()) @db.Uuid
+    // Day and time
+    scheduleDay          String
+    scheduleStartingTime DateTime @db.Time()
+    scheduleEndingTime   DateTime @db.Time()
+
     classId String @db.Uuid
     class   Class  @relation(fields: [classId], references: [id])
 
-    studentId BigInt
-    student   Student? @relation(fields: [studentId], references: [id])
-
-    @@unique([classId, studentId])
+    // @@unique([scheduleDay,scheduleTime,room]) + if class is ongoing
 }
 
-model ClassSchedule {
-    id       String   @id @default(uuid()) @db.Uuid
-    roomId   String   @db.Uuid
-    room     Room     @relation(fields: [roomId], references: [id])
-    schedule DateTime
-    classId  String   @db.Uuid
-    class    Class    @relation(fields: [classId], references: [id])
-}
-
+// Class schedule have room
 model Room {
     id            String          @id @default(uuid()) @db.Uuid
     building      String          @db.Text
@@ -81,4 +69,90 @@ model Room {
     deletedAt     DateTime?       @db.Date
 
     @@unique([building, name])
+}
+
+// Class have discussions 
+model ClassDiscussion {
+    id       String @id @default(uuid()) @db.Uuid
+    authorId String @db.Uuid
+    // Teacher and Student can post class discussion
+    user     User   @relation(fields: [authorId], references: [id])
+
+    title   String @db.Text
+    content String @db.Text
+
+    // Class Discussion can be commented by teacher and student
+    classDiscussionComment ClassDiscussionComment[]
+
+    // Class Discussion can be reacted By Teacher and student
+    classDiscussionReact ClassDiscussionReact[]
+
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+    deletedAt DateTime? @db.Date
+    Class     Class?    @relation(fields: [classId], references: [id])
+    classId   String?   @db.Uuid
+}
+
+model ClassDiscussionComment {
+    id       String @id @default(uuid()) @db.Uuid
+    authorId String @db.Uuid
+    // Teacher and Student can post class discussion
+    user     User   @relation(fields: [authorId], references: [id])
+
+    comment String @db.Text
+
+    createdAt         DateTime?        @default(now())
+    updatedAt         DateTime?        @updatedAt
+    deletedAt         DateTime?        @db.Date
+    ClassDiscussion   ClassDiscussion? @relation(fields: [classDiscussionId], references: [id])
+    classDiscussionId String?          @db.Uuid
+}
+
+enum Reaction {
+    like
+    heart
+    laugh
+    angry
+    sad
+    smile
+    celebrate
+}
+
+model ClassDiscussionReact {
+    id String @id @default(uuid()) @db.Uuid
+
+    authorId String @db.Uuid
+    // Teacher and Student can react class discussion
+    user     User   @relation(fields: [authorId], references: [id])
+
+    reaction Reaction
+
+    createdAt         DateTime?        @default(now())
+    updatedAt         DateTime?        @updatedAt
+    deletedAt         DateTime?        @db.Date
+    ClassDiscussion   ClassDiscussion? @relation(fields: [classDiscussionId], references: [id])
+    classDiscussionId String?          @db.Uuid
+}
+
+model ClassStudent {
+    id      String @id @default(uuid()) @db.Uuid
+    classId String @db.Uuid
+    class   Class  @relation(fields: [classId], references: [id])
+
+    studentId BigInt
+    student   Student? @relation(fields: [studentId], references: [id])
+
+    classGrade ClassGrade[]
+
+    @@unique([classId, studentId])
+}
+
+model ClassGrade {
+    classStudentId String        @id @default(uuid()) @db.Uuid
+    classStudent   ClassStudent? @relation(fields: [classStudentId], references: [id])
+    prelim         String        @db.Text
+    midterm        String        @db.Text
+    preFinals      String        @db.Text
+    finals         String        @db.Text
 }

@@ -1,24 +1,35 @@
 import {Department} from '@prisma/client';
 
-export const departments = [
+export const departments: {
+  value: Department;
+  name: string;
+}[] = [
   {
-    value: 'ict' as Department,
+    value: 'ict',
     name: 'Information Communication Technology'
   },
   {
-    value: 'bm' as Department,
+    value: 'bm',
     name: 'Business Management'
   },
   {
-    value: 'hm' as Department,
+    value: 'hm',
     name: 'Hotel Management'
   },
   {
-    value: 'sh' as Department,
+    value: 'sh',
     name: 'Senior High'
   },
   {
-    value: 'tm' as Department,
+    value: 'tm',
     name: 'Tourism Management'
+  },
+  {
+    value: 'ga',
+    name: 'General Academic'
+  },
+  {
+    value: 'ba',
+    name: 'Broadcasting Communication'
   }
 ];

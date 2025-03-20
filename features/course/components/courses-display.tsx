@@ -6,9 +6,9 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/compo
 
 export default async function CoursesDisplay() {
   const courses = await prisma.course.findMany({
-    // orderBy: {
-    //   createdAt: 'desc'
-    // }
+    orderBy: {
+      createdAt: 'desc'
+    }
   });
   return (
     <>

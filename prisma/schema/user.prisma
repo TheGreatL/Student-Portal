@@ -15,18 +15,22 @@ enum Role {
 }
 
 model User {
-  id        String    @id @default(uuid()) @db.Uuid
-  firstName String
-  lastName  String
-  email     String    @unique
-  password  String
-  avatar    String
-  role      Role
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  deletedAt DateTime?
-  student   Student?
-  teacher   Teacher?
+  id                     String                   @id @default(uuid()) @db.Uuid
+  firstName              String
+  lastName               String
+  email                  String                   @unique
+  password               String
+  avatar                 String
+  role                   Role
+  createdAt              DateTime?                @default(now())
+  updatedAt              DateTime?                @updatedAt
+  deletedAt              DateTime?
+  student                Student?
+  teacher                Teacher?
+  // Both Teacher and student can post class discussion
+  classDiscussion        ClassDiscussion[]
+  ClassDiscussionComment ClassDiscussionComment[]
+  ClassDiscussionReact   ClassDiscussionReact[]
 
   @@unique([lastName, email, firstName])
   @@index([id, email, role])
@@ -47,6 +51,8 @@ enum Department {
   bm
   tm
   hm
+  ga
+  ba
 }
 
 model Teacher {

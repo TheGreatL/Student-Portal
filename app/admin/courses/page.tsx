@@ -6,6 +6,7 @@ import CoursesDisplay from '@/features/course/components/courses-display';
 export default async function CoursesPage() {
   // TODO: ADD COURSE: MANAGE COURSE: ASSIGN COURSE(STUDENT AND EMPLOYEE)
 
+  console.log('refresh');
   return (
     <section className='flex grow flex-col'>
       <section>

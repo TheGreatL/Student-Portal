@@ -76,18 +76,7 @@ export async function createClassAction(formData: FormData): Promise<{
         academicYear,
         courseId,
         isOngoing,
-        teacherId,
-        ClassGrade: {
-          create: {
-            prelim: '-',
-            midterm: '-',
-            preFinals: '-',
-            finals: '-'
-          }
-        }
-      },
-      include: {
-        ClassGrade: true
+        teacherId
       }
     });
     return {

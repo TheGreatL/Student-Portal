@@ -3,10 +3,11 @@ import CreateCourseModal from '@/features/course/components/create-course';
 import React from 'react';
 import CoursesDisplay from '@/features/course/components/courses-display';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CoursesPage() {
   // TODO: ADD COURSE: MANAGE COURSE: ASSIGN COURSE(STUDENT AND EMPLOYEE)
 
-  console.log('refresh');
   return (
     <section className='flex grow flex-col'>
       <section>

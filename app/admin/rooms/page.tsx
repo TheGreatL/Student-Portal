@@ -3,6 +3,7 @@ import RoomsTable from '@/features/class/components/rooms-table';
 import prisma from '@/service/db';
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
 export default async function RoomsPage() {
   const rooms = await prisma.room.findMany({
     orderBy: {

@@ -3,6 +3,8 @@ import CreateClassModal from '@/features/class/components/modals/create-class';
 import prisma from '@/service/db';
 import React from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ClassesPage() {
   const teachers = await prisma.user.findMany({
     where: {
